@@ -1,49 +1,63 @@
-# Hệ Thống Quản Lý Thẻ ATM
+# Hệ Thống Quản Lý Thẻ ATM 💳
 
-Ứng dụng web Java quản lý thẻ ATM, cho phép xem danh sách thẻ, thực hiện các giao dịch và xem thống kê giao dịch theo từng loại.
+Ứng dụng web Java quản lý thẻ ATM, cho phép xem danh sách thẻ, thực hiện các giao dịch và thống kê giao dịch theo từng loại.
 
-## Mô tả dự án
+![Banner](https://i.imgur.com/zjXnA0x.png)
 
-Hệ thống Quản Lý Thẻ ATM là một ứng dụng web được phát triển bằng Java Servlet, JSP và JSTL, sử dụng cơ sở dữ liệu Microsoft SQL Server. Ứng dụng cung cấp các chức năng quản lý thẻ ATM và giao dịch, bao gồm:
+## 📋 Mô tả dự án
 
-- Hiển thị danh sách thẻ ATM
-- Theo dõi trạng thái hoạt động của thẻ (hoạt động/bị khóa)
-- Thêm các giao dịch mới (rút tiền, nạp tiền, chuyển khoản)
-- Xem lịch sử giao dịch của từng thẻ
-- Thống kê tổng tiền theo từng loại giao dịch
+Hệ thống Quản Lý Thẻ ATM là một ứng dụng web được phát triển bằng Java Servlet, JSP và JSTL, sử dụng cơ sở dữ liệu Microsoft SQL Server. Ứng dụng được xây dựng theo mô hình MVC (Model-View-Controller) và cung cấp giao diện trực quan, thân thiện với người dùng.
 
-## Cấu trúc dự án
+### Chức năng chính:
+
+- ✅ Hiển thị danh sách thẻ ATM với thông tin chi tiết
+- ✅ Theo dõi trạng thái hoạt động của thẻ (hoạt động/bị khóa)
+- ✅ Thêm các giao dịch mới (rút tiền, nạp tiền, chuyển khoản)
+- ✅ Xem lịch sử giao dịch của từng thẻ
+- ✅ Thống kê tổng tiền theo từng loại giao dịch
+- ✅ Kiểm tra thẻ khóa trước khi cho phép giao dịch
+
+## 🚀 Công nghệ sử dụng
+
+- **Back-end**: Java Servlet, JSP, JSTL
+- **Cơ sở dữ liệu**: Microsoft SQL Server
+- **Front-end**: HTML, CSS, JSP
+- **Máy chủ ứng dụng**: Apache Tomcat 10
+- **IDE**: NetBeans
+- **Java Version**: JDK 17
+
+## 📁 Cấu trúc dự án
 
 ```
 PRJ301_DE180293/
 ├── src/
 │   └── java/
-│       ├── controller/
+│       ├── controller/          # Các servlet điều khiển
 │       │   ├── DivideServlet.java
 │       │   └── TransactionServlet.java
-│       ├── dao/
+│       ├── dao/                 # Data Access Objects
 │       │   ├── CardDAO.java
 │       │   └── TransactionDAO.java
-│       ├── db/
+│       ├── db/                  # Kết nối database
 │       │   ├── ConnectDB.java
 │       │   └── DatabaseInfo.java
-│       ├── filter/
+│       ├── filter/              # Bộ lọc
 │       │   └── CardBlockFilter.java
-│       └── model/
+│       └── model/               # Các đối tượng nghiệp vụ
 │           ├── Card.java
 │           └── Transaction.java
 ├── web/
-│   ├── views/
+│   ├── views/                   # Các trang JSP
 │   │   ├── auth/
 │   │   │   └── transaction.jsp
 │   │   └── home.jsp
 │   └── WEB-INF/
 │       └── web.xml
 └── database/
-    └── CreateDB.sql
+    └── CreateDB.sql             # Script tạo cơ sở dữ liệu
 ```
 
-## Cơ sở dữ liệu
+## 💾 Cơ sở dữ liệu
 
 Dự án sử dụng Microsoft SQL Server với hai bảng chính:
 
@@ -72,89 +86,109 @@ CREATE TABLE Transactions (
 );
 ```
 
-## Mô hình phân lớp (MVC)
+## 🏗️ Mô hình phân lớp (MVC)
 
 ### Model
 
-- **Card.java**: Đại diện cho thông tin của thẻ ATM
-- **Transaction.java**: Đại diện cho thông tin giao dịch
+- **Card.java**: Chứa thông tin về thẻ ATM (số thẻ, tên chủ thẻ, ngày hết hạn, trạng thái)
+- **Transaction.java**: Chứa thông tin về giao dịch (ID, số thẻ, số tiền, loại giao dịch, ngày giao dịch)
 
 ### DAO (Data Access Object)
 
-- **CardDAO.java**: Cung cấp các phương thức truy xuất cơ sở dữ liệu liên quan đến thẻ
-- **TransactionDAO.java**: Cung cấp các phương thức truy xuất cơ sở dữ liệu liên quan đến giao dịch
+- **CardDAO.java**: Truy xuất dữ liệu về thẻ (lấy danh sách thẻ, kiểm tra trạng thái thẻ)
+- **TransactionDAO.java**: Truy xuất dữ liệu về giao dịch (thêm giao dịch, lấy lịch sử giao dịch, tính tổng tiền theo loại)
 
 ### Controller
 
-- **DivideServlet.java**: Xử lý các yêu cầu liên quan đến hiển thị danh sách thẻ và xem giao dịch
-- **TransactionServlet.java**: Xử lý các yêu cầu liên quan đến thêm giao dịch mới
+- **DivideServlet.java**: Xử lý hiển thị danh sách thẻ, xem giao dịch và thống kê
+- **TransactionServlet.java**: Xử lý thêm giao dịch mới và kiểm tra tính hợp lệ
 
 ### View
 
-- **home.jsp**: Hiển thị danh sách thẻ, danh sách giao dịch và thống kê
+- **home.jsp**: Hiển thị danh sách thẻ ATM, lịch sử giao dịch và bảng thống kê
 - **transaction.jsp**: Form thêm giao dịch mới
 
-## Chức năng chính
+## 📋 Chức năng chi tiết
 
-### Xem danh sách thẻ
+### 1. Xem danh sách thẻ
 
-- Hiển thị tất cả thẻ ATM trong hệ thống
-- Hiển thị thông tin chi tiết: số thẻ, chủ thẻ, ngày hết hạn, trạng thái
+- Hiển thị tất cả thẻ ATM trong hệ thống với giao diện hiện đại
+- Phân biệt rõ ràng giữa thẻ đang hoạt động và thẻ bị khóa
+- Cung cấp các nút chức năng cho từng thẻ (Xem giao dịch, Thêm giao dịch)
 
-### Xem giao dịch của thẻ
+### 2. Xem giao dịch của thẻ
 
-- Hiển thị lịch sử giao dịch của thẻ được chọn
-- Hiển thị thông tin chi tiết: ID, số tiền, loại giao dịch, ngày giao dịch
+- Hiển thị lịch sử giao dịch theo thứ tự thời gian
+- Hiển thị chi tiết: ID, số tiền, loại giao dịch (với màu sắc phân biệt), ngày giao dịch
+- Tự động tính toán tổng tiền theo từng loại giao dịch
 
-### Thêm giao dịch mới
+### 3. Thêm giao dịch mới
 
-- Tạo giao dịch mới cho thẻ (rút tiền, nạp tiền, chuyển khoản)
-- Kiểm tra trạng thái thẻ trước khi cho phép thực hiện giao dịch
+- Giao diện form đơn giản, dễ sử dụng
+- Hỗ trợ 3 loại giao dịch: Rút tiền, Nạp tiền, Chuyển khoản
+- Kiểm tra thẻ bị khóa và hiển thị thông báo phù hợp
 
-### Thống kê giao dịch
+### 4. Thống kê giao dịch
 
-- Tính tổng tiền theo từng loại giao dịch (rút tiền, nạp tiền, chuyển khoản)
-- Hiển thị số liệu thống kê khi xem giao dịch của thẻ
+- Tính tổng tiền theo từng loại giao dịch (Withdrawal, Deposit, Transfer)
+- Hiển thị bảng thống kê với thiết kế trực quan, dễ đọc
 
-## Công nghệ sử dụng
+## ⚙️ Hướng dẫn cài đặt và sử dụng
 
-- **Ngôn ngữ lập trình**: Java
-- **Framework**: Java Servlet, JSP, JSTL
-- **Cơ sở dữ liệu**: Microsoft SQL Server
-- **Front-end**: HTML, CSS, JSP
-- **Máy chủ ứng dụng**: Apache Tomcat 10
-- **Công cụ phát triển**: NetBeans
+### Yêu cầu hệ thống
 
-## Hướng dẫn cài đặt
+- JDK 17 trở lên
+- Apache Tomcat 10
+- Microsoft SQL Server
+- NetBeans IDE 18 trở lên
 
-1. **Yêu cầu hệ thống**
+### Cài đặt
 
-   - JDK 17 trở lên
-   - Apache Tomcat 10
-   - Microsoft SQL Server
-   - NetBeans IDE
+1. **Clone dự án từ GitHub**
+
+   ```
+   git clone https://github.com/yourusername/PRJ301_DE180293.git
+   ```
 
 2. **Thiết lập cơ sở dữ liệu**
 
-   - Chạy script SQL trong tệp `database/CreateDB.sql` để tạo cơ sở dữ liệu và các bảng
+   - Mở SQL Server Management Studio
+   - Chạy script SQL trong tệp `database/CreateDB.sql`
 
-3. **Cấu hình kết nối**
+3. **Cấu hình kết nối cơ sở dữ liệu**
 
-   - Cập nhật thông tin kết nối trong `src/java/db/DatabaseInfo.java`
+   - Mở file `src/java/db/DatabaseInfo.java`
+   - Cập nhật thông tin kết nối (username, password, port) phù hợp với môi trường của bạn
 
 4. **Biên dịch và triển khai**
 
    - Mở dự án trong NetBeans
-   - Xây dựng dự án (Build)
-   - Triển khai lên Tomcat (Deploy)
+   - Chuột phải vào dự án và chọn "Clean and Build"
+   - Chuột phải vào dự án và chọn "Run"
 
 5. **Truy cập ứng dụng**
-   - Mở trình duyệt và truy cập: `http://localhost:8080/PRJ301_DE180293/DivideServlet`
+   - Mở trình duyệt web
+   - Truy cập: `http://localhost:8080/PRJ301_DE180293/DivideServlet`
 
-## Tác giả
+## 💡 Một số tính năng nổi bật
+
+- **Giao diện hiện đại**: Thiết kế responsive, hỗ trợ nhiều thiết bị
+- **Phân biệt trạng thái**: Hiển thị rõ ràng trạng thái thẻ bằng màu sắc và biểu tượng
+- **Thống kê trực quan**: Bảng tổng hợp giao dịch theo từng loại
+- **Xác thực dữ liệu**: Kiểm tra tính hợp lệ của thẻ trước khi thực hiện giao dịch
+- **Thông báo**: Hệ thống thông báo lỗi và thành công rõ ràng
+
+## 👨‍💻 Tác giả
 
 - **Họ tên**: Mai Đăng Huy
 - **Mã sinh viên**: DE180293
 - **Lớp**: SE18D04
 - **Môn học**: PRJ301 - Java Web Application Development
-# PE_PRJ301_DE180293
+
+## 📄 Giấy phép
+
+Dự án được phát triển cho mục đích học tập trong môn PRJ301 tại FPT University.
+
+---
+
+© 2024 Mai Đăng Huy - DE180293
