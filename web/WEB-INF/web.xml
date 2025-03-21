@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <filter>
+        <filter-name>CardBlockFilter</filter-name>
+        <filter-class>filter.CardBlockFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CardBlockFilter</filter-name>
+        <url-pattern>/TransactionServlet</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>DivideServlet</servlet-name>
+        <servlet-class>controller.DivideServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransactionServlet</servlet-name>
+        <servlet-class>controller.TransactionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DivideServlet</servlet-name>
+        <url-pattern>/DivideServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransactionServlet</servlet-name>
+        <url-pattern>/TransactionServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
